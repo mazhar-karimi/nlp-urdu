@@ -1,8 +1,7 @@
 import re
 from ufal.udpipe import Model, Pipeline, ProcessingError
 import pandas as pd
-import conllformat
-
+import conllformat 
 model = Model.load('G:/Softwares/urdu-udtb-ud-2.3-181115.udpipe')
 pipeline = Pipeline(model, 'tokenize', Pipeline.DEFAULT, Pipeline.DEFAULT, 'conllu')
 error = ProcessingError()
@@ -19,7 +18,7 @@ def smarttokenizer(sentence):
     i = 1
     for l in processed_lines:      
         #print(l)
-        dic = conll.format.get_dict(l)
+        dic = conllformat.get_dict(l)
         if (dic["pos"] == 'PROPN' or dic["pos"] == 'NOUN'): 
             pname += dic["word"] + ' '
         elif pname != "":
