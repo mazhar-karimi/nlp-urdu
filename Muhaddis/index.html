@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Bootstrap 4, from LayoutIt!</title>
+	<title>Muhaddith | Muhaddis - Islamic Question Answer System (Alpha (0.666666666666667))</title>
 
 	<meta name="description" content="Source code generated using layoutit.com">
 	<meta name="author" content="LayoutIt!">
@@ -52,21 +52,28 @@
 			</li>
 	</script>
 	<script>
+		var result_template = document.getElementById('result_template').innerHTML;
+
 		function Search() {
 			var keyword = document.getElementById('keyword').value;
 
 			var xhr = new XMLHttpRequest();
+			xhr.open('get', 'search/' +keyword );
 
 			xhr.onload = function () {
-				var hadiths = JSON.parse(xhr.response);
+				var hadiths = JSON.parse(xhr.response).hadiths;
 
 				var result = document.getElementById('result');
 				result.innerHTML = '';
 
 				for (let index = 0; index < hadiths.length; index++) {
 					const hadith = hadiths[index];
+
+					result.innerHTML+= result_template.replace('{{body}}', hadith);
 				}
 			};
+
+			xhr.send();
 		}
 
 	</script>
@@ -84,7 +91,7 @@
 					<div class="form-group mx-sm-3 mb-2">						
 						<input type="text" class="form-control" id="keyword" placeholder="سوال کریں">
 					</div>
-					<button type="button" class="btn btn-primary mb-2">جواب ڈھونڈیں</button>
+					<button type="button" onclick="Search()" class="btn btn-primary mb-2">جواب ڈھونڈیں</button>
 					<a onclick="" style="cursor:pointer;">آپشنز</a>
 				</form>
 			</div>
@@ -92,26 +99,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="result" id="result">
-					<li class="list-item">
-						<div class="hadith-head">
-							اپنے بھائی کے لئے وہی بات چاہنا جو اپنے لئے چاہے ایمان میں داخل ہے
-						</div>
-						<div class="hadith-body">
-							مسدد، یحیی، شعبہ، قتادہ، انس نبی (صلی اللہ علیہ وآلہ وسلم) سے نقل کرتے ہیں کہ آپ (صلی اللہ علیہ وآلہ وسلم) نے فرمایا تم میں
-							سے کوئی شخص اس وقت تک (کامل) مومن نہیں بن سکتا، جب تک کہ اپنے بھائی مسلمان کے لئے وہی نہ چاہے جو اپنے لئے چاہتا ہے۔
-						</div>
-
-					</li>
-					<li class="list-item">
-						<div class="hadith-head">
-							اپنے بھائی کے لئے وہی بات چاہنا جو اپنے لئے چاہے ایمان میں داخل ہے
-						</div>
-						<div class="hadith-body">
-							مسدد، یحیی، شعبہ، قتادہ، انس نبی (صلی اللہ علیہ وآلہ وسلم) سے نقل کرتے ہیں کہ آپ (صلی اللہ علیہ وآلہ وسلم) نے فرمایا تم میں
-							سے کوئی شخص اس وقت تک (کامل) مومن نہیں بن سکتا، جب تک کہ اپنے بھائی مسلمان کے لئے وہی نہ چاہے جو اپنے لئے چاہتا ہے۔
-						</div>
-
-					</li>
+					 
 				</ul>
 			</div>
 		</div>
