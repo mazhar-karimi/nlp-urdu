@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Bootstrap 4, from LayoutIt!</title>
+
+	<meta name="description" content="Source code generated using layoutit.com">
+	<meta name="author" content="LayoutIt!">
+
+	<link href="css/bootstrap-rtl.css" rel="stylesheet">
+	<!-- <link href="css/style.css" rel="stylesheet"> -->
+	<style>
+		.result {
+			font-family: Alvi Nastaleeq;
+		}
+
+		.result>.list-item {
+			margin-bottom: 9px;
+		}
+
+		.hadith-head {
+			font-size: 22px;
+			color: #1a0dab;
+
+		}
+
+		.hadith-body {
+			font-size: 18px;
+		}
+
+		footer {
+			position: fixed;
+			height: 100px;
+			bottom: 0;
+			width: 100%;
+			text-align: center;
+		}
+	</style>
+	<script type="text/html" id="result_template">
+		<li class="list-item">
+				<div class="hadith-head">
+					{{head}}
+				</div>
+				<div class="hadith-body">
+					{{body}}
+				</div>
+
+			</li>
+	</script>
+	<script>
+		function Search() {
+			var keyword = document.getElementById('keyword').value;
+
+			var xhr = new XMLHttpRequest();
+
+			xhr.onload = function () {
+				var hadiths = JSON.parse(xhr.response);
+
+				var result = document.getElementById('result');
+				result.innerHTML = '';
+
+				for (let index = 0; index < hadiths.length; index++) {
+					const hadith = hadiths[index];
+				}
+			};
+		}
+
+	</script>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<form class="form-inline">
+					<div class="form-group mb-2">
+						<img src='images/muhadith2.PNG' />
+					</div>
+					<div class="form-group mx-sm-3 mb-2">						
+						<input type="text" class="form-control" id="keyword" placeholder="سوال کریں">
+					</div>
+					<button type="button" class="btn btn-primary mb-2">جواب ڈھونڈیں</button>
+					<a onclick="" style="cursor:pointer;">آپشنز</a>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<ul class="result" id="result">
+					<li class="list-item">
+						<div class="hadith-head">
+							اپنے بھائی کے لئے وہی بات چاہنا جو اپنے لئے چاہے ایمان میں داخل ہے
+						</div>
+						<div class="hadith-body">
+							مسدد، یحیی، شعبہ، قتادہ، انس نبی (صلی اللہ علیہ وآلہ وسلم) سے نقل کرتے ہیں کہ آپ (صلی اللہ علیہ وآلہ وسلم) نے فرمایا تم میں
+							سے کوئی شخص اس وقت تک (کامل) مومن نہیں بن سکتا، جب تک کہ اپنے بھائی مسلمان کے لئے وہی نہ چاہے جو اپنے لئے چاہتا ہے۔
+						</div>
+
+					</li>
+					<li class="list-item">
+						<div class="hadith-head">
+							اپنے بھائی کے لئے وہی بات چاہنا جو اپنے لئے چاہے ایمان میں داخل ہے
+						</div>
+						<div class="hadith-body">
+							مسدد، یحیی، شعبہ، قتادہ، انس نبی (صلی اللہ علیہ وآلہ وسلم) سے نقل کرتے ہیں کہ آپ (صلی اللہ علیہ وآلہ وسلم) نے فرمایا تم میں
+							سے کوئی شخص اس وقت تک (کامل) مومن نہیں بن سکتا، جب تک کہ اپنے بھائی مسلمان کے لئے وہی نہ چاہے جو اپنے لئے چاہتا ہے۔
+						</div>
+
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			</div>
+		</div>
+
+
+	</div>
+	<footer class="fixed-bottom">
+		<div class="container">
+			Place sticky footer content here.
+		</div>
+	</footer>
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/scripts.js"></script>
+</body>
+
+</html>
