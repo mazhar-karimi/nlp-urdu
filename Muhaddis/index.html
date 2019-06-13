@@ -12,6 +12,7 @@
 	<meta name="author" content="LayoutIt!">
 
 	<link href="css/bootstrap-rtl.css" rel="stylesheet">
+
 	<!-- <link href="css/style.css" rel="stylesheet"> -->
 	<style>
 		.result {
@@ -32,13 +33,17 @@
 			font-size: 18px;
 		}
 
-		footer {
+		.highlight {
+			background-color: yellow;
+		}
+
+		/* footer {
 			position: fixed;
 			height: 100px;
 			bottom: 0;
 			width: 100%;
 			text-align: center;
-		}
+		} */
 	</style>
 	<script type="text/html" id="result_template">
 		<li class="list-item">
@@ -52,28 +57,49 @@
 			</li>
 	</script>
 	<script>
+
 		var result_template = document.getElementById('result_template').innerHTML;
 
 		function Search() {
 			var keyword = document.getElementById('keyword').value;
 
 			var xhr = new XMLHttpRequest();
-			xhr.open('get', 'search/' +keyword );
+			xhr.open('get', 'search/' + keyword);
+
 
 			xhr.onload = function () {
+
 				var hadiths = JSON.parse(xhr.response).hadiths;
 
-				var result = document.getElementById('result');
-				result.innerHTML = '';
+				var words = keyword.split(' ');
 
 				for (let index = 0; index < hadiths.length; index++) {
-					const hadith = hadiths[index];
+					const hadith_info = hadiths[index];
 
-					result.innerHTML+= result_template.replace('{{body}}', hadith);
+					for (let i = 0; i < words.length; i++) {
+						const word = words[i];
+
+						hadith_info.hadith = hadith_info.hadith.replace(word, '<span class="highlight">'+word+'</span>');
+
+						// var word_index = hadith_info.hadith.indexOf(word);
+						// if (word_index >= 0) {
+						// 	hadith_info.hadith = hadith_info.hadith.substring(0, word_index) + "<span class='highlight'>" +
+						// 		hadith_info.hadith.substring(word_index, word_index + word.length) + "</span>" +
+						// 		hadith_info.hadith.substring(word_index + word.length);
+
+						// }
+					}
+
+
+
+					result.innerHTML += result_template.replace('{{body}}', hadith_info.hadith).replace('{{head}}', hadith_info.chapter);
 				}
 			};
 
 			xhr.send();
+
+			var result = document.getElementById('result');
+			result.innerHTML = '';
 		}
 
 	</script>
@@ -88,7 +114,7 @@
 					<div class="form-group mb-2">
 						<img src='images/muhadith2.PNG' />
 					</div>
-					<div class="form-group mx-sm-3 mb-2">						
+					<div class="form-group mx-sm-3 mb-2">
 						<input type="text" class="form-control" id="keyword" placeholder="سوال کریں">
 					</div>
 					<button type="button" onclick="Search()" class="btn btn-primary mb-2">جواب ڈھونڈیں</button>
@@ -99,7 +125,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="result" id="result">
-					 
+
 				</ul>
 			</div>
 		</div>
@@ -110,11 +136,11 @@
 
 
 	</div>
-	<footer class="fixed-bottom">
+	<!-- <footer class="fixed-bottom">
 		<div class="container">
 			Place sticky footer content here.
 		</div>
-	</footer>
+	</footer> -->
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
