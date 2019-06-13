@@ -49,18 +49,20 @@ term_freq_doc_cache = {}
 print('loading dataset...')
 conn = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=G:\Softwares\EQWH-V6.4-190407\EasyHadees - Copy.mdb;')
 cursor = conn.cursor()
-cursor.execute("select id, urdutext from ahadith where urdutext is not null and urdutext like '%وضو%'")
+cursor.execute("select id, urdutext, Chapter from ahadith where urdutext is not null and urdutext like '%وضو%'")
 
 # and urdutext like '%وضو%'
 
 Y = []
+chapters = []
 corpus = []
 lens_of_d= []
 for row in cursor.fetchall():
-    hadith = row[1]#.replace('صلی اللہ علیہ وآلہ وسلم','')    
+    hadith = row[1] 
     corpus.append(hadith)
     lens_of_d.append(len(hadith.split()))
     Y.append(row[0])
+    chapters.append(row[2])
 cursor.close()
 conn.close()
 
@@ -162,7 +164,8 @@ def getanswer(question,strict=False,pagesize=10):
 
         hadiths = []
         for i in range(0,pagesize):
-            hadiths.append(corpus[doc_scores[i]['docid']])
+            docid = doc_scores[i]['docid']
+            hadiths.append({"hadith": corpus[docid], "chapter": chapters[docid]})
             #printmd(""+corpus[doc_scores[i]['docid']]+'')
             #print()
         return hadiths
@@ -173,9 +176,9 @@ def getanswer(question,strict=False,pagesize=10):
 print('finished loading qa system.')
 
 #question = 'آپ کس طرح وضو کرتے تھے'
-question = 'وضو کس طرح ٹوٹتا ہے'
+#question = 'وضو کس طرح ٹوٹتا ہے'
 ##question = 'وضو کس طرح کریں'
 ##question = 'وضو کا کیا طریقہ ہے'
 #question = 'استنجا کیسے کریں'
 
-getanswer(question, strict=False)
+#getanswer(question, strict=False)

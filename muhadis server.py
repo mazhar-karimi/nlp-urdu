@@ -8,11 +8,9 @@ app = Flask(__name__,static_url_path='')
 api = Api(app)
 
 class Search(Resource):
-    def get(self, question):
-        print(question)
+    def get(self, question):        
         hadiths =  islamicqa.getanswer(question, strict=False)
-        result = {'hadiths': hadiths}
-        print(result)
+        result = {'hadiths': hadiths}       
         return jsonify(result)
     
 #api.add_resource(Js1, '/js/<filename>') 
